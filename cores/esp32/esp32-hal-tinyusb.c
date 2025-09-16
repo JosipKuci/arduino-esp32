@@ -763,6 +763,8 @@ static void usb_device_task(void *param) {
   (void)param;
   while (1) {
     tud_task();  // RTOS forever loop
+    // releases this highest priority task to run other lower priority task that use USB Composite (issue #10307)
+    vTaskDelay(1);
   }
 }
 
